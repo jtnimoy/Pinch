@@ -1,0 +1,37 @@
+#!/usr/bin/python
+
+#
+# this script will generate a new C++ class in its own file, inside
+# the intern directory.
+#
+
+import string
+import sys
+import os
+
+f = open(sys.path[0] + "/cpptemplate.cpp","r")
+cpptemplate = f.read()
+f.close()
+
+f = open(sys.path[0] + "/headertemplate.h","r")
+headertemplate = f.read()
+f.close()
+
+def replace(str,newname):
+    s = string.split(str,"<MODULENAME>")
+    return string.join(s,newname)
+
+if(len(sys.argv)<2):
+    print "creates a new object in jttoolkit intern and adds it to the makefile.\nexample: ./create.py JTClassName"
+else:
+    full=sys.argv[1]
+    print "making object \""+full+".cpp\""
+    name = full
+    #execfile("./generate")
+    out=open(sys.path[0] + "/../intern/"+full+".cpp","a")
+    out.write(replace(cpptemplate,name))
+    out.close()
+    out=open(sys.path[0] + "/../intern/"+name+".h","a")
+    out.write(replace(headertemplate,name))
+    out.close()
+

@@ -1,0 +1,33 @@
+#!/usr/bin/python
+
+import sys
+
+chmod = 0755
+
+if(len(sys.argv)==1):
+    print "help goes here"
+else: #make it
+    import os
+    projname = sys.argv[1]
+    try:
+        os.mkdir(projname+".app",chmod)
+        os.mkdir(projname+".app/Contents",chmod)
+        os.mkdir(projname+".app/Contents/MacOS",chmod)
+        os.mkdir(projname+".app/Contents/Resources",chmod)
+        os.mkdir(projname+".app/Contents/Resources/renders",chmod)
+    except(OSError):#who cares if it already exists
+        pass
+    
+    os.system("cp -r ./media ./" + projname + ".app/Contents/Resources")
+    os.system("cp ./"+projname+" ./" + projname + ".app/Contents/MacOS/" + projname)
+    os.system("cp ./media/appIcon.icns ./" + projname + ".app/Contents/Resources/appIcon.icns")
+    #Info.plist
+    plist = open("script/Info.plist.template.xml","r")
+    plist = plist.read()
+    import string
+    plist = string.split(plist,"%%PROJNAME%%")
+    plist = string.join(plist,projname)
+
+    a = open("./" + projname + ".app/Contents/Info.plist","w")
+    a.write(plist)
+    a.close()

@@ -1,0 +1,29 @@
+#!/usr/bin/python
+import string
+infile = open("../script/list.txt","r")
+objs = string.split(infile.read())
+out = open("objectsbuild_generated.mk","w")
+for i in objs:
+    if(i!=''):
+        n = string.split(i,'.')[0] #chop off the .cpp or .c
+        out.write("build/"+n+".o: intern/"+i+"\n\tcd build; g++ $(OFLAGS) ../intern/"+i+"\n\n")
+out.close()
+
+out = open("objectslist_generated.mk","w")
+out.write("OBJECTS=");
+for i in objs:
+    if(i!=''):
+        n = string.split(i,'.')[0] #chop off the .cpp or .c
+        out.write(n+".o ")
+out.write("\n\n")
+out.close()
+
+
+out = open("objectslistbuild_generated.mk","w")
+out.write("OBJECTSBUILD=");
+for i in objs:
+    if(i!=''):
+        n = string.split(i,'.')[0] #chop off the .cpp or .c
+        out.write("build/"+n+".o ")
+out.write("\n\n")
+out.close()

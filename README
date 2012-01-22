@@ -1,0 +1,271 @@
+<pre>
+
+
+       ______________            ____ __ _ __ 
+      / /_  __/_  __/___  ____  / / //_/(_) /_
+ __  / / / /    / / / __ \\/ __ \\/ / ,<  / / __/
+/ /_/ / / /    / / / /_/ / /_/ / / /| |/ / /_  
+\\____/ /_/   /_/  \\____/\\____/_/_/ |_/_/\\__/
+
+
+JTTOOLKIT
+Josh Nimoy's personal ACU strain.
+A community C++ template since 1999.
+I hope the philosophies herein will improve you.
+
+
+
+-------------------------------------------------------------------
+I. system overview
+II. Mac OS X tool chain prep instructions
+III. Windows XP tool chain prep instructions
+-------------------------------------------------------------------
+
+
+I. System Overview
+
+jttoolkit is a C++ template project designed to speed up the process
+of being a new media developer who uses C++. jttoolkit attempts to
+disprove myths that a lower level language cannot be used to prototype
+new media software. Rather than there being a pre-compiled partition
+between the framework's author and its users, the entire set of
+functions is exposed right down to the C++ source level. In order to
+create a new instance of a jttoolkit template, simply copy over a
+previous project and clean out the classes you don't want. Let
+jttoolkit evolve into your very own thing. Rename the functions and
+classes so that they are more appropriate to your own language or way
+of thinking. Make this your own.
+
+Cygwin and Darwinports can be thought of as unix-completion
+suppliments for your OS. These systems can add the necessary
+command-lines to activate a terminal-based Makefile project.
+jttoolkit is a bunch of files that sit ontop of these sorts of open
+source prerequisites. To do a simple compile, open up a terminal. Use
+the `cd` command to go into the same directory as this readme
+file. Then type `make`. If nothing or an error happened, see sections
+II and III. After completing one compile, you are free to use any text
+editor you choose. Some good ones for Mac are XCode (used JUST for the
+syntax coloring), TextMate, BBEdit, and don't forget that emacs and vi
+are defaultly installed on OS X. On a PC, there is TextPad, Visual
+Studio (used JUST for the syntax coloring), and there is emacs/vi for
+cygwin. Once you edit a C++ file or add a new one to the intern
+folder, switch back to the terminal and press `up`. Your last command
+(make) should still be there. Hit enter and see your changes.
+
+-----------------------
+
+Makefile commands . . .
+
+`make` - builds the entire thing
+`make clean` - reduces the project to its bare DNA through file deletion
+`make doc` - generates the Doxygen documentation.
+             Afterwards, open doc/html/index.html
+`make run` - simply launches the program for you.
+
+The Makefile is not so complex, in favor of really
+tweaking the project settings in the SConstruct file. 
+
+-----------------------
+
+SCRIPTS
+
+You do not have to write an entirely new class every time you need
+one. That can be repetitive. Why not generate one from a template? Try
+the following . . .
+
+./scripts/create EggFooYoung
+
+then look in the intern folder for EggFooYoung.h and
+EggFooYoung.cpp. Open them up and see a polite little empty class
+ready for you to type. Again, this is meant to be a tendon saver.
+
+
+
+II.
+Installing on a Mac (intel and PPC) with Tiger:
+	   1.
+	   Install xcode off the osx installation disk. Make sure you
+	   are using the appropriate xcode for an intel mac, as using
+	   non-universal Tiger disks will result in an incomplete
+	   darwinports build-up.
+
+	   2.
+	   Go to http://darwinports.opendarwin.org/getdp and click
+	   that link that says "for Tiger (Universal)".  Download
+	   Darwinports and install it properly onto your system.
+
+	   3.
+	   Open a terminal and do the following command line:
+	              sudo port install scons graphicsmagick figlet
+	   Yes, you need sudo privs.
+
+	   4.
+	   cd into the the same directory as the Makefile, type `make`
+	   and hit return. If all is well, you should see program.app
+	   and program in your directory.
+
+	   5.
+	   Type `make run` and hit enter. The screen will go blank and
+	   a welcome graphic should appear, with some arial
+	   type. Press ESC to close the window. Press Ctrl+F to toggle
+	   fullscreen. There are various other mac menu items provided
+	   by the GLUT windowing toolkit. To start, insert your code
+	   into `intern/Global.cpp`
+
+	   MAC TROUBLESHOOTING
+
+	   sometimes ./script/appIt gets a permission denied error
+	   because the executability of the script was somehow changed
+	   - maybe due to a recent file transfer. just go `chmod 775
+	   ./script/appIt`
+
+	   6. download and install ODE (Open Dynamics Engine by
+	   building from their sources over darwin ports e.g.
+	   autogen.sh, then configure, then make, then sudo make install
+
+
+
+III.
+Installing on a PC with 32bit Windows XP
+	   1.
+	   Start installing Cygwin. Here's a URL to the net-installer.
+	   http://www.cygwin.com/setup.exe
+
+	   2.
+	   The Cygwin wizard will ask for settings.
+	   + Choose "Install from Internet" (the radio button should
+	   be defaultly selected).
+	   + Choose a root directory of c:\cygwin whenever
+	   possible. Accept the recommended defaults.
+	   + Your local package directory is where cygwin caches its
+	   little instructions and stuff. These folders appear on
+	   desktops, have names like
+	   `ftp%3a%2f%2fcygwin.osuosl.org%2fpub%2fcygwin` and are safe
+	   to delete after an install is complete.
+	   + Choose whatever internet connection settings work for
+	   you...
+	   + Choose a fast mirror. You can experiment with several
+	   mirrors by pressing `next` until the window's title bar is
+	   saying `Select Packages`. Then press `< back` once to
+	   return to the mirrors list. In the US, I generally find
+	   cygwin.osuosl.org will do.
+	   
+	   SELECT PACKAGES - Accept the default packages that are
+	   already checked, but do not jump the gun and decide you're
+	   going to install the whole thing. That could take a
+	   while. But do select the following packages for jttoolkit:
+		  In the Devel category:
+		     Change gcc-g++ from Skip to 3.4.4-3
+		     Change make from Skip to 3.81-1
+		     Change gdb from Skip to 20060706
+		     libGraphicsMagick-devel from Skip to 1.0.6-1
+		  In the Editors category:
+		     Change emacs from Skip to 21.2-13
+		  In the Graphics category:
+		     Change freeglut from Skip to 2.2.0-1
+		     Change GraphicsMagick from Skip to 1.0.6-1
+		      [Warning: Do not install ImageMagick, it will
+		      make GraphicsMagick cease to work.]
+		     Change libMagick-devel from Skip to 6.3.0.1-2
+		     Change opengl from Skip to 1.1.0-8
+		  In the Interpreters category:
+		     Change python from Skip to 2.4.3-1
+		  In the X11 category:
+		     A whole bunch of xorg-x11-**** packages were
+		     automagickally switched toward too recent a
+		     version! All that are at 6.8.99.901-1 need to be
+		     clicked until they change to 6.8.2.x or
+		     6.8.1.x. If you decide to go back and install new
+		     packages in the future, you'll always have to
+		     come back here and change the force-upgrades back
+		     to `Keep`.
+
+           Make sure it finishes installing successfully.
+
+           2.
+	   To start a cygwin session, do one of the following:
+	      - double click the Cygwin icon on your desktop,
+	      - Start Menu > All Programs > Cygwin > Cygwin Bash Shell
+	      - explore c:\cygwin and launch cygwin.bat - not the icon.
+
+
+	   3.
+	   Go to http://www.scons.org and download the stable(0.96.1)
+	   Tarball (not the windows, not the source). You can extract
+	   it with `tar xvfz scons-0.96.1.tar.gz`. CD into the
+	   scons-0.96.1 directory and type `python setup.py install`
+
+	   4.
+	   cd into the the same directory as the Makefile, type `make`
+	   and hit return. If all is well, you should see program.exe.
+	   5.
+	   Type `make run` and hit enter. The screen will go blank and
+	   a welcome graphic should appear, with some arial
+	   type. Press ESC to close the window. Press Ctrl+F to toggle
+	   fullscreen. To start, insert your code into
+	   `intern/Global.cpp` 
+
+	   6.
+	   You will want to double click the file called
+	   program.exe. This can work, but you have to add the
+	   directories `c:\cygwin\bin` and `c:\cygwin\usr\X11R6\bin`
+	   to your Windows system PATH using the System control
+	   panel. You are also welcome to try and copy those DLLs into
+	   the same dir.
+
+	   7.
+	   General Cygwin/unix tips to make your life easier:
+
+		Terminal advice.
+
+		* The Cygwin equivelent of C:\ is /cygdrive/c
+		
+		* Want to launch an explorer window from the current
+		terminal view? Try the command `explorer .`
+
+		*
+		
+		 When you open the bash shell, your home directory
+		 defaultly has nothing in it. Make some convenient
+		 links to your desktop and stuff with commands like
+    
+    ln -s /cygdrive/c/Documents\ and\ Settings/you/Desktop ~/Desktop
+
+		will allow you to CD into your Desktop from home
+		dir. A lot easier than typing that.
+
+		*
+
+		The Windows console is relatively inflexible compared
+		to classy resizable console services that Cygwin can
+		provide you.
+
+	      - run the command `startx` a Cygwin-compiled xterm
+                window will pop up. This window is resizable til your
+                hearts content. The project window will actually pop
+                up from a cygwin xterm window, unlike the following
+                alternative which features better clipboard support.
+
+	      - if you want a properly resizable terminal with nicer
+                clipboard features, see the following URL about how to
+                quickly run an ssh server in cygwin . . .
+		http://pigtail.net/LRP/printsrv/cygwin-sshd.html
+		then SSH into localhost from putty.exe . . .
+		http://www.chiark.greenend.org.uk/~sgtatham/putty
+		Be warned that running any windowing apps is going
+		to fail, because you are logged in as an ssh user
+		through the network.
+	
+
+		*
+
+		download the Open Dynamics Engine (ODE) and build it
+		with visual studio. place releasesingledll into
+		c:\opt\ode\lib and create c:\opt\ode\include, copying
+		the contents of the ode include folder there
+		(drawstuff and ode folders should be at the root of
+		opt/ode/include)
+
+
+	
+</pre>

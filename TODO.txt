@@ -1,0 +1,5 @@
+update help file so that it contains libpng only and not imagemagick
+
+get windows program icon working
+
+get windows one click install working for windows

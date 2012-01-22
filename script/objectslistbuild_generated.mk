@@ -1,0 +1,2 @@
+OBJECTSBUILD=build/jttoolkit.o build/project.o build/JoshFont.o build/quadstretch.o build/obj.o build/Global.o build/JRect.o build/Satellite.o build/TheBall.o build/BallPointer.o build/BallPathTracer.o build/JPoint.o build/Athletes.o build/Guy.o build/GameGrid.o build/JImage.o build/Clover.o build/GuyPointer.o build/StatSign.o build/GuyConnectors.o build/JImageSequence.o build/ShotProfile.o build/FluxDiagram.o build/TreeNode.o 
+
